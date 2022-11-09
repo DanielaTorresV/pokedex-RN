@@ -25,8 +25,49 @@ export const styles = StyleSheet.create({
   activityIndicator: {
     height: 100
   },
-  pokeImg:{
+  cardContainer: {
+    marginHorizontal: 10, 
+    marginBottom: 25,
+    //backgroundColor: 'gray',
+    borderRadius: 10,
+    height: 120,
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5,
+    },
+    shadowOpacity: 0.36,
+    shadowRadius: 6.68,
+    elevation: 11,
+  },
+  cardNamePokemon: {
+    top: 10,
+    left: 10,
+    fontSize: 20,
+    fontWeight: 'bold',
+    color: 'white'
+  },
+  pokebolaContainer: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    overflow: 'hidden',
+    width: 100,
+    height: 100,
+    opacity: 0.5
+  },
+  pokebola: {
+    position: 'absolute',
+    bottom: -25,
+    right: -25,
     width: 100,
     height: 100
+  },
+  pokeImg:{
+    position: 'absolute',
+    bottom: -5,
+    right: -8,
+    width: 110,
+    height: 110
   }
 });

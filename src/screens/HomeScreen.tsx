@@ -1,10 +1,12 @@
 import React from 'react';
-import { ActivityIndicator, FlatList, Image, Text } from 'react-native';
+import { ActivityIndicator, FlatList, Image, Text, View } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import Icon from 'react-native-vector-icons/Ionicons';
 import { styles, colors } from '../theme/themeApp';
 import usePokemonPaginated from '../hooks/usePokemonPaginated';
+
+import PokemonCard from '../components/PokemonCard';
 
 const HomeScreen = () => {
  
@@ -16,24 +18,30 @@ const HomeScreen = () => {
       <Image 
        source={ require('../assets/pokebola.png') }
        style={ styles.pokebolabg }
-      />
-      
-      <Text style={{ 
-        ...styles.title,
-        ...styles.globalMargin,
-        top: top + 20
-        }} >Pokedex </Text>
+      />        
 
+      <View
+        style={{ alignItems: 'center' }}
+      >
         <FlatList 
           data={ simplePokemonList }
           keyExtractor={ (pokemon) => pokemon.id }
           showsVerticalScrollIndicator={ false }
-          renderItem= { ({ item, index }) => (
-            <Image
-              source={{ uri: item.picture }}
-              style={ styles.pokeImg }
-            />
+          numColumns={ 2 }
+
+          ListHeaderComponent={(
+            <Text style={{ 
+              ...styles.title,
+              ...styles.globalMargin,
+              top: top + 20,
+              marginBottom: top + 20,
+              paddingBottom: 10
+              }} 
+            > Pokedex 
+            </Text>
           )}
+
+          renderItem= { ({ item, index }) => ( <PokemonCard pokemon={ item }/> )}
           onEndReached={ loadPokemons }
           onEndReachedThreshold={ 0.4 }
 
@@ -45,6 +53,8 @@ const HomeScreen = () => {
             />
           )}
         />
+      </View>
+        
     </>
   )
 }
