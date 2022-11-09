@@ -9,6 +9,8 @@ import { RootStackParams } from '../navigation/StackNavigator';
 import { styles } from '../theme/themeApp';
 import { FadeInImage } from '../components/FadeInImage';
 import usePokemon from '../hooks/usePokemon';
+import PokemonCard from '../components/PokemonCard';
+import PokemonDetail from '../components/PokemonDetail';
 
 interface Props extends StackScreenProps<RootStackParams, 'DetailScreen'> {};
 
@@ -59,14 +61,21 @@ const { isLoading, pokemon } = usePokemon(id);
       </View>
 
       {/* Detalles y Loading */}
-      <View style={{
-        ...styles.activityIndicatorDetail
-      }}>
-        <ActivityIndicator 
-          color={ color }
-          size={ 50 }
-        />
-      </View>
+      {
+        isLoading 
+        ? (
+          <View style={{
+            ...styles.activityIndicatorDetail
+          }}>
+            <ActivityIndicator 
+              color={ color }
+              size={ 50 }
+            />
+          </View>
+        ) :
+        <PokemonDetail pokemon={ pokemon }/>
+      }
+      
     </View>
     
   )
