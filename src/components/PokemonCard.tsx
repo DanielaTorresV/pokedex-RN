@@ -1,5 +1,9 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { Dimensions, Image, Text, TouchableOpacity, View } from 'react-native';
+
+
+import { useNavigation } from '@react-navigation/core';
+
 import { SimplePokemon } from '../interfaces/PokemonInterfaces';
 import { FadeInImage } from './FadeInImage';
 import { styles } from '../theme/themeApp';
@@ -15,6 +19,9 @@ interface Props {
 const PokemonCard = ({ pokemon }: Props) => {
 
   const [ bgColor, setBgColor ] = useState('grey');
+
+  const navigation = useNavigation<any>();
+
   const isMounted = useRef( true );
 
   useEffect(() => {
@@ -37,6 +44,13 @@ const PokemonCard = ({ pokemon }: Props) => {
   return (
       <TouchableOpacity
         activeOpacity={ 0.8 }
+        onPress={
+          () => 
+            navigation.navigate('DetailScreen', { 
+              simplePokemon: pokemon,
+              color: bgColor
+             })
+          }
       >
 
         <View style={{ 

@@ -69,5 +69,34 @@ export const styles = StyleSheet.create({
     right: -8,
     width: 110,
     height: 110
+  },
+  headerContainerDetail: {
+    height: 380,
+    zIndex: 999,
+    alignItems: 'center',
+    borderBottomRightRadius: 1000,
+    borderBottomLeftRadius: 1000
+  },
+  backButtonHeader: {
+    position: 'absolute',
+    left: 20,
+  },
+  pokemonNameDetail: {
+    fontSize: 40,
+    color: 'white',
+    alignSelf: 'flex-start',
+    left: 20
+  },
+  pokebolaHeaderDetail: {
+    width: 250,
+    height: 250,
+    bottom: -20,
+    opacity: 0.7
+  },
+  pokeImgHeaderDetail: {
+    position: 'absolute',
+    bottom: -15,
+    width: 250,
+    height: 250,
   }
 });
