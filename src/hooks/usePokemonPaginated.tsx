@@ -39,6 +39,7 @@ const usePokemonPaginated = () => {
 
   return {
     simplePokemonList,
+    loadPokemons,
     isLoading
   }
 

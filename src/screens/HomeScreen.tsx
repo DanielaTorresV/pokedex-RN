@@ -1,15 +1,15 @@
 import React from 'react';
-import { Image, Text } from 'react-native';
+import { ActivityIndicator, FlatList, Image, Text } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import Icon from 'react-native-vector-icons/Ionicons';
-import { styles } from '../theme/themeApp';
+import { styles, colors } from '../theme/themeApp';
 import usePokemonPaginated from '../hooks/usePokemonPaginated';
 
 const HomeScreen = () => {
  
   const { top } = useSafeAreaInsets();
-  const { isLoading, simplePokemonList } = usePokemonPaginated();
+  const { isLoading, simplePokemonList, loadPokemons } = usePokemonPaginated();
 
   return (
     <>
@@ -23,6 +23,28 @@ const HomeScreen = () => {
         ...styles.globalMargin,
         top: top + 20
         }} >Pokedex </Text>
+
+        <FlatList 
+          data={ simplePokemonList }
+          keyExtractor={ (pokemon) => pokemon.id }
+          showsVerticalScrollIndicator={ false }
+          renderItem= { ({ item, index }) => (
+            <Image
+              source={{ uri: item.picture }}
+              style={ styles.pokeImg }
+            />
+          )}
+          onEndReached={ loadPokemons }
+          onEndReachedThreshold={ 0.4 }
+
+          ListFooterComponent={(
+            <ActivityIndicator 
+              style={ styles.activityIndicator }
+              color={ colors.primary }
+              size={ 30 }
+            />
+          )}
+        />
     </>
   )
 }

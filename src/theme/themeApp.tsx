@@ -21,5 +21,12 @@ export const styles = StyleSheet.create({
     width: 300,
     height: 300,
     opacity: 0.2
+  },
+  activityIndicator: {
+    height: 100
+  },
+  pokeImg:{
+    width: 100,
+    height: 100
   }
 });
