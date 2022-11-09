@@ -98,5 +98,10 @@ export const styles = StyleSheet.create({
     bottom: -15,
     width: 250,
     height: 250,
-  }
+  },
+  activityIndicatorDetail: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
 });

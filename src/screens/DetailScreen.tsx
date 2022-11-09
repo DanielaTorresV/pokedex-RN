@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
+import { ActivityIndicator, Image, Text, TouchableOpacity, View } from 'react-native';
 import { StackScreenProps } from '@react-navigation/stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -8,6 +8,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { RootStackParams } from '../navigation/StackNavigator';
 import { styles } from '../theme/themeApp';
 import { FadeInImage } from '../components/FadeInImage';
+import usePokemon from '../hooks/usePokemon';
 
 interface Props extends StackScreenProps<RootStackParams, 'DetailScreen'> {};
 
@@ -17,8 +18,10 @@ const { simplePokemon, color } = route.params;
 const { id, name, picture } = simplePokemon;
 const { top } = useSafeAreaInsets();
 
+const { isLoading, pokemon } = usePokemon(id);
+
   return (
-    <View>
+    <View style={{ flex: 1 }}>
       {/* Header */}
       <View style={{
         ...styles.headerContainerDetail,
@@ -53,6 +56,16 @@ const { top } = useSafeAreaInsets();
             style={ styles.pokeImgHeaderDetail }
           />
 
+      </View>
+
+      {/* Detalles y Loading */}
+      <View style={{
+        ...styles.activityIndicatorDetail
+      }}>
+        <ActivityIndicator 
+          color={ color }
+          size={ 50 }
+        />
       </View>
     </View>
     
