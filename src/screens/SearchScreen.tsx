@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Platform, StyleSheet, Text, FlatList, Dimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
@@ -7,18 +7,34 @@ import usePokemonSearch from '../hooks/usePokemonSearch';
 import { styles } from '../theme/themeApp';
 import PokemonCard from '../components/PokemonCard';
 import Loading from '../components/Loading';
+import { SimplePokemon } from '../interfaces/PokemonInterfaces';
 
 const screenWidth = Dimensions.get('window').width;
 
 const SearchScreen = () => {
 
+  const [ term, setTerm ] = useState('');
+  const [ pokemonFiltered, setPokemonFiltered ] = useState<SimplePokemon[]>([]);
+  
   const { top } = useSafeAreaInsets();
   const { isFetching, simplePokemonList } = usePokemonSearch();
 
-  if ( isFetching ){
-    return(
-      <Loading />
+  useEffect(() => {
+
+    if(term.length === 0) {
+      return setPokemonFiltered([])
+    }
+
+    setPokemonFiltered(
+      simplePokemonList.filter( 
+        (poke) => poke.name.toLowerCase()
+        .includes( term.toLowerCase() ) )
     )
+
+  }, [ term ])
+
+  if ( isFetching ){
+    return(<Loading />)
   }
 
   return (
@@ -26,15 +42,18 @@ const SearchScreen = () => {
       ...stylesSearch.container
       }}
     >
-      <SearchInput style={{
-        position: 'absolute',
-        zIndex: 999,
-        width: screenWidth - 20,
-        top: (Platform.OS === 'ios') ? top : top + 20
-      }} />
+      <SearchInput 
+        onDebounce={ ( value ) => setTerm( value ) }
+        style={{
+          position: 'absolute',
+          zIndex: 999,
+          width: screenWidth - 20,
+          top: (Platform.OS === 'ios') ? top : top + 20
+        }} 
+      />
 
       <FlatList 
-          data={ simplePokemonList }
+          data={ pokemonFiltered }
           keyExtractor={ (pokemon) => pokemon.id }
           showsVerticalScrollIndicator={ false }
           numColumns={ 2 }
@@ -46,7 +65,7 @@ const SearchScreen = () => {
               paddingBottom: 10,
               marginTop: top + 70
               }} 
-            > Pokedex 
+            > { term } 
             </Text>
           )}
 
