@@ -22,6 +22,11 @@ export const styles = StyleSheet.create({
     height: 300,
     opacity: 0.2
   },
+  containerIndicator: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
   activityIndicator: {
     height: 100
   },

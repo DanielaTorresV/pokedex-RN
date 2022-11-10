@@ -1,11 +1,14 @@
 import React from 'react';
-import { View, Platform, StyleSheet, ActivityIndicator, Text, FlatList } from 'react-native';
+import { View, Platform, StyleSheet, Text, FlatList, Dimensions } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 
 import SearchInput from '../components/SearchInput';
 import usePokemonSearch from '../hooks/usePokemonSearch';
-import { styles, colors } from '../theme/themeApp';
+import { styles } from '../theme/themeApp';
 import PokemonCard from '../components/PokemonCard';
+import Loading from '../components/Loading';
+
+const screenWidth = Dimensions.get('window').width;
 
 const SearchScreen = () => {
 
@@ -14,25 +17,21 @@ const SearchScreen = () => {
 
   if ( isFetching ){
     return(
-      <View style={{
-        ...stylesSearch.containerIndicator
-      }}>
-        <ActivityIndicator
-          color='#808B96'
-          size={ 50 }
-        />
-        <Text>Cargando...</Text>
-      </View>
+      <Loading />
     )
   }
 
   return (
     <View style={{ 
-      ...stylesSearch.container,
-      marginTop: Platform.OS === 'ios' ? top : top + 15
+      ...stylesSearch.container
       }}
     >
-      <SearchInput />
+      <SearchInput style={{
+        position: 'absolute',
+        zIndex: 999,
+        width: screenWidth - 20,
+        top: (Platform.OS === 'ios') ? top : top + 20
+      }} />
 
       <FlatList 
           data={ simplePokemonList }
@@ -44,7 +43,8 @@ const SearchScreen = () => {
             <Text style={{ 
               ...styles.title,
               ...styles.globalMargin,
-              paddingBottom: 10
+              paddingBottom: 10,
+              marginTop: top + 70
               }} 
             > Pokedex 
             </Text>
@@ -65,10 +65,5 @@ const stylesSearch = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: 10
-  },
-  containerIndicator: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
   }
 });
