@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
   basicSprite: {
     marginTop: 10,
     width: 120,
-    height: 50
+    height: 100
   },
   finalSprite: {
     marginBottom: 20,

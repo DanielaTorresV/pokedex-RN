@@ -4,6 +4,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../screens/HomeScreen';
 import DetailScreen from '../screens/DetailScreen';
 import { SimplePokemon } from '../interfaces/PokemonInterfaces';
+import SearchScreen from '../screens/SearchScreen';
 
 export type RootStackParams = {
   HomeScreen: undefined,
