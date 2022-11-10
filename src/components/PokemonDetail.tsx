@@ -14,8 +14,7 @@ const PokemonDetail = ({ pokemon }: Props) => {
     <ScrollView
       showsVerticalScrollIndicator={ false }
       style={{
-        ...StyleSheet.absoluteFillObject,
-        marginBottom: 15
+        ...StyleSheet.absoluteFillObject
       }}
     >
       {/* Types y peso */}
@@ -40,7 +39,7 @@ const PokemonDetail = ({ pokemon }: Props) => {
           }
         </View>
 
-        <Text style={ styles.title }>Peso</Text>
+        <Text style={ styles.title }>Weight</Text>
         <Text style={ styles.text }>{ pokemon.weight } kg</Text>
           
       </View>
@@ -110,6 +109,44 @@ const PokemonDetail = ({ pokemon }: Props) => {
         </View>
       </View>
 
+      {/* Stats */}
+
+      <View style={ styles.container }>
+        <Text style={ styles.title }>Base Stats</Text>
+        <View >
+          {
+            pokemon.stats.map( ( stat, i ) => (
+              <View 
+                key={ stat.stat.name + i}
+                style={{ flexDirection: 'row' }}
+              >
+                <Text
+                  style={{ ...styles.text, width: 150 }}
+                >
+                  { stat.stat.name }:
+                </Text>
+                <Text
+                  style={{ ...styles.text, fontWeight: 'bold' }}
+                >
+                  { stat.base_stat }
+                </Text>
+              </View>
+              ))
+          }
+        </View>
+        {/* Sprite Final */}
+        <View
+          style={ styles.finalSprite }
+        >
+          <FadeInImage
+            uri={ pokemon.sprites.front_default }
+            style={ styles.basicSprite }
+          />
+        </View>
+        
+
+      </View>
+
     </ScrollView>
   )
 }
@@ -133,5 +170,9 @@ const styles = StyleSheet.create({
     marginTop: 10,
     width: 120,
     height: 50
+  },
+  finalSprite: {
+    marginBottom: 20,
+    alignItems: 'center'
   }
 });
