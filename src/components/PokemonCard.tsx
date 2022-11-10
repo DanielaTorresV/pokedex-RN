@@ -31,7 +31,7 @@ const PokemonCard = ({ pokemon }: Props) => {
       if ( !isMounted.current ) return;
       
       if ( colors.platform === 'android' ){
-        setBgColor( colors.dominant || 'grey');
+        setBgColor( colors.vibrant || 'grey');
       } else if ( colors.platform === 'ios' ) {
         setBgColor( colors.background || 'grey' )
       }
